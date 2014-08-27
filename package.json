@@ -4,6 +4,7 @@
   "description": "Clock-accurate timeout for Node.js and browser",
   "main": "index.js",
   "scripts": {
+    "build": "mkdir -p dist/ && browserify index.js --standalone clocktick -o dist/clocktick.js",
     "test": "node test | tap-spec"
   },
   "repository": {
@@ -20,6 +21,7 @@
     "date-now": "^1.0.1"
   },
   "devDependencies": {
+    "browserify": "^5.10.1",
     "tap-spec": "^0.2.1",
     "tape": "^2.14.0"
   }

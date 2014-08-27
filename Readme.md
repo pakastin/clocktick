@@ -9,12 +9,6 @@ Accuracy should be around 1–2ms.
 
     npm install clocktick
 
-## testing
-Clone to desktop and then run following commands at clocktick folder:
-
-    npm install
-    npm test
-
 ## usage
 Usage is similar to setTimeout, but without delay parameter:
 
@@ -39,3 +33,14 @@ You can cancel the tick by using clearTimeout:
     var timeout = tick(callback)
 
     clearTimeout(timeout)
+
+## testing
+Clone to desktop and then run following commands at clocktick folder:
+
+    npm install
+    npm test
+
+## building
+
+    npm install
+    npm run build
