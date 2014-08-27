@@ -35,56 +35,15 @@
 Basically it is identical to setTimeout, but it triggers callback function precisely on every second.</p>
 
 <h2>
-<a name="accuracy" class="anchor" href="#accuracy"><span class="octicon octicon-link"></span></a>accuracy</h2>
+<a name="example" class="anchor" href="#accuracy"><span class="octicon octicon-link"></span></a>example</h2>
 
-<p>Accuracy should be around 1–2ms.</p>
-
-<h2>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>installation</h2>
-
-<pre><code>npm install clocktick
-</code></pre>
+<p>Tick at <b id="ractive-container"></b> (hh:mm:ss:ms)</p>
 
 <h2>
-<a name="testing" class="anchor" href="#testing"><span class="octicon octicon-link"></span></a>testing</h2>
+<a name="documentation" class="anchor" href="#accuracy"><span class="octicon octicon-link"></span></a>documentation</h2>
 
-<p>Clone to desktop and then run following commands at clocktick folder:</p>
+<p>Read documentation from <a href="http://github.com/pakastin/clocktick">Github</a></p>
 
-<pre><code>npm install
-npm test
-</code></pre>
-
-<h2>
-<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>usage</h2>
-
-<p>Usage is similar to setTimeout, but without delay parameter:</p>
-
-<pre><code>var tick = require('clocktick')
-tick(callback, parameters...)
-</code></pre>
-
-<h2>
-<a name="repeat" class="anchor" href="#repeat"><span class="octicon octicon-link"></span></a>repeat</h2>
-
-<p>You can repeat the tick by just calling it again:</p>
-
-<pre><code>tick(callback)
-
-function callback () {
-  console.log('tick')
-  tick(callback)
-}
-</code></pre>
-
-<h2>
-<a name="cancel" class="anchor" href="#cancel"><span class="octicon octicon-link"></span></a>cancel</h2>
-
-<p>You can cancel the tick by using clearTimeout:</p>
-
-<pre><code>var timeout = tick(callback)
-
-clearTimeout(timeout)
-</code></pre>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/pakastin">pakastin</a></p>
@@ -92,6 +51,57 @@ clearTimeout(timeout)
       </footer>
     </div>
     <script src="javascripts/scale.fix.js"></script>
-    
+    <script src="http://cdn.ractivejs.org/latest/ractive.min.js"></script>
+    <script>!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.clocktick=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+
+    'use strict'
+
+    var dateNow = require('date-now')
+
+    module.exports = clocktick
+
+    function clocktick (callback) {
+      var self, args, now, nowRounded, nextTick
+
+      self = this
+      args = Array.prototype.slice.call(arguments, 1)
+      now = dateNow()
+      nowRounded = (now / 1000 | 0) * 1000
+      nextTick = 1000 - (now - nowRounded)
+
+      return setTimeout(function () {
+        callback && callback.apply(self, args)
+      }, nextTick)
+    }
+
+    },{"date-now":2}],2:[function(require,module,exports){
+    module.exports = Date.now || now
+
+    function now() {
+        return new Date().getTime()
+    }
+
+    },{}]},{},[1])(1)
+    });</script>
+    <script>
+    var ractive = new Ractive({
+      el: '#ractive-container',
+      template: '{{timestamp}}'
+    })
+
+    clocktick(updateTimestamp)
+
+    function updateTimestamp () {
+      var now = new Date()
+      var hours = ('0' + now.getHours()).slice(-2)
+      var minutes = ('0' + now.getMinutes()).slice(-2)
+      var seconds = ('0' + now.getSeconds()).slice(-2)
+      var milliseconds = ('00' + now.getMilliseconds()).slice(-3)
+      var timestamp = hours + ':' + minutes + ':' + seconds + ':' + milliseconds
+
+      ractive.set('timestamp', timestamp)
+      clocktick(updateTimestamp)
+    }
+    </script>
   </body>
 </html>
