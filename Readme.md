@@ -10,7 +10,7 @@ Accuracy should be around 1–2ms.
     npm install clocktick
 
 ## testing
-Clone to desktop and then run following commands at clocktick folder
+Clone to desktop and then run following commands at clocktick folder:
 
     npm install
     npm test
