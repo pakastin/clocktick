@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Clocktick by pakastin</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Clocktick</h1>
+        <p>Clock-accurate timeout for Node.js and browser</p>
+
+        <p class="view"><a href="https://github.com/pakastin/clocktick">View the Project on GitHub <small>pakastin/clocktick</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/pakastin/clocktick/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/pakastin/clocktick/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/pakastin/clocktick">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="clocktick" class="anchor" href="#clocktick"><span class="octicon octicon-link"></span></a>clocktick</h1>
+
+<p>Clock-accurate timeout for Node.js and browser.
+Basically it is identical to setTimeout, but it triggers callback function precisely on every second.</p>
+
+<h2>
+<a name="accuracy" class="anchor" href="#accuracy"><span class="octicon octicon-link"></span></a>accuracy</h2>
+
+<p>Accuracy should be around 1–2ms.</p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>installation</h2>
+
+<pre><code>npm install clocktick
+</code></pre>
+
+<h2>
+<a name="testing" class="anchor" href="#testing"><span class="octicon octicon-link"></span></a>testing</h2>
+
+<p>Clone to desktop and then run following commands at clocktick folder:</p>
+
+<pre><code>npm install
+npm test
+</code></pre>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>usage</h2>
+
+<p>Usage is similar to setTimeout, but without delay parameter:</p>
+
+<pre><code>var tick = require('clocktick')
+tick(callback, parameters...)
+</code></pre>
+
+<h2>
+<a name="repeat" class="anchor" href="#repeat"><span class="octicon octicon-link"></span></a>repeat</h2>
+
+<p>You can repeat the tick by just calling it again:</p>
+
+<pre><code>tick(callback)
+
+function callback () {
+  console.log('tick')
+  tick(callback)
+}
+</code></pre>
+
+<h2>
+<a name="cancel" class="anchor" href="#cancel"><span class="octicon octicon-link"></span></a>cancel</h2>
+
+<p>You can cancel the tick by using clearTimeout:</p>
+
+<pre><code>var timeout = tick(callback)
+
+clearTimeout(timeout)
+</code></pre>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/pakastin">pakastin</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
