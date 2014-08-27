@@ -1,0 +1,26 @@
+{
+  "name": "clocktick",
+  "version": "0.0.1",
+  "description": "Clock-accurate timeout for Node.js and browser",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test | tap-spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pakastin/clocktick"
+  },
+  "author": "Juha Lindstedt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pakastin/clocktick/issues"
+  },
+  "homepage": "https://github.com/pakastin/clocktick",
+  "dependencies": {
+    "date-now": "^1.0.1"
+  },
+  "devDependencies": {
+    "tap-spec": "^0.2.1",
+    "tape": "^2.14.0"
+  }
+}
