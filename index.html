@@ -41,13 +41,12 @@
 
           <div class="highlight"><pre>
 var Ractive = require('ractive')
+var tick = require('clocktick')
 
 var ractive = new Ractive({
   el: '#ractive-container',
   template: '{{timestamp}}'
 })
-
-var tick = require('clocktick')
 
 tick(updateTimestamp)
 
