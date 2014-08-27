@@ -29,20 +29,46 @@
       </header>
       <section>
         <h1>
-<a name="clocktick" class="anchor" href="#clocktick"><span class="octicon octicon-link"></span></a>clocktick</h1>
+          <a name="clocktick" class="anchor" href="#clocktick"><span class="octicon octicon-link"></span></a>clocktick</h1>
 
-<p>Clock-accurate timeout for Node.js and browser.
-Basically it is identical to setTimeout, but it triggers callback function precisely on every second.</p>
+          <p>Clock-accurate timeout for Node.js and browser.
+          Basically it is identical to setTimeout, but it triggers callback function precisely on every second.</p>
 
-<h2>
-<a name="example" class="anchor" href="#accuracy"><span class="octicon octicon-link"></span></a>example</h2>
+          <h2>
+          <a name="example" class="anchor" href="#accuracy"><span class="octicon octicon-link"></span></a>example</h2>
 
-<p>Tick at <b id="ractive-container"></b> (hh:mm:ss:ms)</p>
+          <p>Tick at <b id="ractive-container"></b> (hh:mm:ss:ms)</p>
 
-<h2>
-<a name="documentation" class="anchor" href="#accuracy"><span class="octicon octicon-link"></span></a>documentation</h2>
+          <div class="highlight"><pre>
+var Ractive = require('ractive')
 
-<p>Read documentation from <a href="http://github.com/pakastin/clocktick">Github</a></p>
+var ractive = new Ractive({
+  el: '#ractive-container',
+  template: '{{timestamp}}'
+})
+
+var tick = require('clocktick')
+
+tick(updateTimestamp)
+
+function updateTimestamp () {
+  var now = new Date()
+
+  var hours = ('0' + now.getHours()).slice(-2)
+  var minutes = ('0' + now.getMinutes()).slice(-2)
+  var seconds = ('0' + now.getSeconds()).slice(-2)
+  var milliseconds = ('00' + now.getMilliseconds()).slice(-3)
+
+  var timestamp = hours + ':' + minutes + ':' + seconds + ':' + milliseconds
+
+  ractive.set('timestamp', timestamp)
+  tick(updateTimestamp)
+}
+          </pre></div>
+          <h2>
+          <a name="documentation" class="anchor" href="#accuracy"><span class="octicon octicon-link"></span></a>documentation</h2>
+
+          <p>Read documentation from <a href="http://github.com/pakastin/clocktick">Github</a></p>
 
       </section>
       <footer>
@@ -84,24 +110,24 @@ Basically it is identical to setTimeout, but it triggers callback function preci
     },{}]},{},[1])(1)
     });</script>
     <script>
-    var ractive = new Ractive({
-      el: '#ractive-container',
-      template: '{{timestamp}}'
-    })
+      var ractive = new Ractive({
+        el: '#ractive-container',
+        template: '{{timestamp}}'
+      })
 
-    clocktick(updateTimestamp)
-
-    function updateTimestamp () {
-      var now = new Date()
-      var hours = ('0' + now.getHours()).slice(-2)
-      var minutes = ('0' + now.getMinutes()).slice(-2)
-      var seconds = ('0' + now.getSeconds()).slice(-2)
-      var milliseconds = ('00' + now.getMilliseconds()).slice(-3)
-      var timestamp = hours + ':' + minutes + ':' + seconds + ':' + milliseconds
-
-      ractive.set('timestamp', timestamp)
       clocktick(updateTimestamp)
-    }
+
+      function updateTimestamp () {
+        var now = new Date()
+        var hours = ('0' + now.getHours()).slice(-2)
+        var minutes = ('0' + now.getMinutes()).slice(-2)
+        var seconds = ('0' + now.getSeconds()).slice(-2)
+        var milliseconds = ('00' + now.getMilliseconds()).slice(-3)
+        var timestamp = hours + ':' + minutes + ':' + seconds + ':' + milliseconds
+
+        ractive.set('timestamp', timestamp)
+        clocktick(updateTimestamp)
+      }
     </script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
