@@ -1,6 +1,6 @@
 # clocktick
 Clock-accurate timeout for Node.js and browser.
-Basically it is identical to setTimeout, but it triggers callback function precisely on every second.
+Basically it is identical to setTimeout, but it triggers callback function precisely on the next second.
 
 ## example
 See an example [here](http://pakastin.github.io/clocktick)
