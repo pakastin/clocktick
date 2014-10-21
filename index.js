@@ -7,7 +7,7 @@ module.exports = clocktick
 
 function clocktick (callback, timeout) {
   var self, args, now, nowRounded, nextTick
-  var timeout = timeout * 1000 || 1000
+  var timeout = (timeout * 1000) || 1000
 
   self = this
   args = Array.prototype.slice.call(arguments, 2)
