@@ -1,20 +1,21 @@
 
 'use strict'
 
+var slice = Array.prototype.slice
 var dateNow = require('date-now')
 
 module.exports = clocktick
 
 function clocktick (callback, timeout, offset) {
-  var self, args, now, nowRounded, nextTick
-  var timeout = (timeout * 1000) || 1000
-  var offset = (offset * 1000) || 0
+  var self = this
+  var args = slice.call(arguments, 2)
 
-  self = this
-  args = Array.prototype.slice.call(arguments, 2)
-  now = dateNow()
-  nowRounded = (now / timeout | 0) * timeout
-  nextTick = timeout - (now - nowRounded) + offset
+  timeout = (timeout * 1000) || 1000
+  offset = (offset * 1000) || 0
+
+  var now = dateNow()
+  var nowRounded = (now / timeout | 0) * timeout
+  var nextTick = timeout - (now - nowRounded) + offset
 
   return setTimeout(function () {
     callback && callback.apply(self, args)

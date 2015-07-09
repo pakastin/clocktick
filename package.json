@@ -21,8 +21,8 @@
     "date-now": "^1.0.1"
   },
   "devDependencies": {
-    "browserify": "^5.10.1",
-    "tap-spec": "^0.2.1",
-    "tape": "^2.14.0"
+    "browserify": "^10.2.4",
+    "tap-spec": "^4.0.2",
+    "tape": "^4.0.0"
   }
 }
